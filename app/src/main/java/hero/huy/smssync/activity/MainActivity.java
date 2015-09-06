@@ -1,11 +1,13 @@
 package hero.huy.smssync.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import hero.huy.smssync.R;
+import hero.huy.smssync.myservice.SmsSyncService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,6 +15,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        startService(new Intent(this, SmsSyncService.class));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(new Intent(getApplicationContext(), SmsSyncService.class));
     }
 
     @Override
